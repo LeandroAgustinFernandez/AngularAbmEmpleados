@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="col-lg-6">
+        <h2>{{accion}} Empleados</h2>
+    </div>
+    <div class="col-lg-6" style="text-align: right;">
+        <button mat-raised-button color="warn" routerLink="">Lista Empleados</button>
+    </div>
+</div>
+<!-- <pre>{{ myform.value | json}}</pre> -->
+<div class="row">
+    <div class="col-lg-4">
+        <form [formGroup]="myform" autocomplete="off">
+            <div class="col-lg-12">
+                <mat-form-field class="example-container" [style.fontSize.px]=16>
+                    <mat-label>Nombre Completo</mat-label>
+                    <input matInput formControlName="nombreCompleto">
+                  </mat-form-field>
+            </div>
+            <div *ngIf="myform.get('nombreCompleto').hasError('required') && myform.get('nombreCompleto').touched" style="margin-top: -20px;">
+                <span class="mda-form-msg">Este campo es<strong> obligatorio</strong></span>
+            </div>
+            <div *ngIf="myform.get('nombreCompleto').hasError('maxlength') && myform.get('nombreCompleto').touched" style="margin-top: -20px;">
+                <span class="mda-form-msg">El campo debe tener como maximo<strong> 20 caracteres</strong></span>
+            </div>
+            <div class="col-lg-12">
+                <mat-form-field class="example-container" [style.fontSize.px]=16>
+                    <mat-label>Correo</mat-label>
+                    <input matInput formControlName="correo">
+                </mat-form-field>
+                <div *ngIf="myform.get('correo').hasError('required') && myform.get('correo').touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es<strong> obligatorio</strong></span>
+                </div>
+                <div *ngIf="myform.get('correo').hasError('email') && myform.get('correo').touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg">El campo no cumple con el <strong>formato de correo</strong></span>
+                </div>
+            </div>
+            <br><br>
+            <div class="col-lg-12">
+                <mat-form-field class="example-full-width" class="example-container" [style.fontSize.px]=16>
+                    <mat-label>Fecha de ingreso</mat-label>
+                    <input matInput formControlName="fechaIngreso" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                  </mat-form-field>   
+                  <div *ngIf="myform.get('fechaIngreso').hasError('required') && myform.get('fechaIngreso').touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es<strong> obligatorio</strong></span>
+                </div>               
+            </div>
+     
+            <div class="col-lg-12">
+                <mat-form-field class="example-container">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput formControlName="telefono">
+                </mat-form-field>
+                <div *ngIf="myform.get('telefono').hasError('required') && myform.get('telefono').touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es<strong> obligatorio</strong></span>
+                </div>     
+            </div>
+            
+            <div class="col-lg-12">
+                <mat-form-field class="example-container" >
+                    <mat-label>Estado Civil</mat-label>
+                    <mat-select formControlName="estadoCivil">
+                      <mat-option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil">
+                        {{estadoCivil}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                <div *ngIf="myform.get('estadoCivil').hasError('required') && myform.get('estadoCivil').touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es<strong> obligatorio</strong></span>
+                </div>   
+            </div>
+            <div class="col-lg-12">
+                <mat-radio-group aria-label="Select sexo" class="example-container" formControlName="sexo">
+                    <mat-radio-button value="Masculino">Masculino</mat-radio-button>
+                    <mat-radio-button value="Femenino">Femenino</mat-radio-button>
+                </mat-radio-group>
+                <div *ngIf="myform.get('sexo').hasError('required') && myform.get('sexo').touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es<strong> obligatorio</strong></span>
+                </div>   
+            </div>
+            <br>
+            <div class="col-lg-12">
+                <button class="btn btn-success btn-lg" type="button" style="min-width:48%;margin:3px;" (click)="guardarEmpleado()" [disabled]="myform.invalid">Aceptar</button>
+                <button class="btn btn-danger btn-lg" type="button"  style="min-width:48%;margin:3px" routerLink="">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-4 offset-lg-2">
+        <img src="../../../assets/img/crear-usuario.jpg" alt="" width="95%" height="95%">
+    </div>
+</div>
